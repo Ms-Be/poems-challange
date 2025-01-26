@@ -1,8 +1,7 @@
-function generatePoem(event) {
-  event.preventDefault();
-
+function displayPoem(response) {
+  
   new Typewriter("#poem", {
-    strings: "Love is a feeling pure and true,",
+    strings:response.data.answer,
     autoStart: true,
     delay: 1,
     cursor: "",
@@ -15,14 +14,14 @@ function generateQuote(event) {
   let apiKey = "1574b6ct4faf434f9d26b8fb5826o0be";
   let context = `Generate poem about${instructionsInput.value}`;
   let prompt =
-    "You are a poet who understand love ,Add a emoji after every qoute you generate in the theme of quote.";
+    "You are a poet who understand love aiming to revive love.Add a emoji after every qoute you generate in the theme of quote.";
   let apiURL = `https://api.shecodes.io/ai/v1/generate?prompt='${prompt}&context=${context}&key=${apiKey}`;
 
-  let poemElement = (document = document.querySelector("#poem"));
+  let poemElement=document.querySelector("#poem");
   poemElement.classList.remove("hidden");
-  poemElement.innerHTML = `<div class="generating">⏳Generating quote for you about ${instructionsInput.value}</div>`;
+  poemElement.innerHTML = `<div class="generating">⏳Generating poem about ${instructionsInput.value}</div>`;
 
-  axios.get(apiURL).then(displayQuote);
+  axios.get(apiURL).then(displayPoem);
 }
 
 let poemFormElement = document.querySelector("#poem-generator-form");
